@@ -6,7 +6,6 @@ jobs:
     steps:
       - run: echo "This job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "running on ${{ runner }}"
-      - run: echo "token url ${{ ACTIONS_ID_TOKEN_REQUEST_URL }}"
       - run: ls
       - run: pwd
       - run: env
