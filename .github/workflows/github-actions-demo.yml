@@ -20,4 +20,4 @@ jobs:
       - run: env
       - name: list aws s3 buckets
         run: |
-          aws s3-api list-buckets
+          aws s3api list-buckets
