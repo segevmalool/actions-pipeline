@@ -1,11 +1,22 @@
 name: Segev's first github actions
 on: [push]
+env:
+  AWS_REGION: us-east-1
+permissions:
+  contents: read
 jobs:
   check-out-aws-oidc-integration:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "running on ${{ runner }}"
-      - run: ls
-      - run: pwd
       - run: env
+      - name: git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::266455520073:role/github-actions-role
+          role-session-name: segevsamplerole
+          aws-region: ${{ env.AWS_REGION }}
+      - name: list aws s3 buckets
+        run: |
+          aws s3-api list-buckets
