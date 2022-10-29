@@ -22,11 +22,11 @@ jobs:
       - run: createdb -U postgres -h localhost -p 5432 prac
       - run: psql -U postgres -h localhost -p 5432 -c "\l"
       - run: echo "image_id=$(docker commit $(cat /tmp/cidfile) ghcr.io/psql-prac:latest)" >> ${GITHUB_ENV}
-      - run: echo ${{ env.image_id }}
+      - run: echo committed image ${{ env.image_id }}
       - name: Login to GHCR
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker push
+      - run: docker push ${{ env.image_id }}
