@@ -2,8 +2,6 @@ name: Deploy Service Container to GHCR
 on:
   push
 jobs:
-  env:
-    postgres-container-id:
   publish-container:
     runs-on: ubuntu-latest
     services:
