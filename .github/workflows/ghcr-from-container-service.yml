@@ -11,8 +11,8 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_HOST_AUTH_METHOD: trust
-          PGDATA: /var/lib/postgresql-static/data
-        options: --cidfile /tmp/cidfile --health-cmd pg_isready -U postgres --health-interval 0.1s
+          PGDATA: /var/lib/postgresql-static/data # bypass data volume
+        options: --cidfile /tmp/cidfile --health-cmd 'pg_isready -U postgres' --health-interval 0.1s
     steps:
       - run: docker container list
       - run: createdb -U postgres -h localhost -p 5432 prac
