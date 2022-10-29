@@ -3,6 +3,7 @@ on:
   push
 jobs:
   publish-container:
+    runs-on: ubuntu-latest
     services:
       postgres-14:
         image: postgres:14
