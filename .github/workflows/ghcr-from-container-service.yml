@@ -1,0 +1,14 @@
+name: Deploy Service Container to GHCR
+on:
+  push
+jobs:
+  publish-container:
+    services:
+      postgres-14:
+        image: postgres:14
+        ports:
+          5432:5432
+        env:
+          POSTGRES_HOST_AUTH_METHOD=trust
+    steps:
+      - run: docker container list

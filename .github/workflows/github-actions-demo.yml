@@ -1,5 +1,6 @@
 name: Segev's first github actions
-on: [push]
+on:
+  push
 env:
   AWS_REGION: us-east-1
 permissions:
