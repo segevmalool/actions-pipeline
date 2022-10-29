@@ -11,8 +11,7 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_HOST_AUTH_METHOD: trust
-        options: |
-          --cidfile /tmp/cidfile
+        options: --cidfile /tmp/cidfile
     steps:
       - run: docker container list
       - name: wait for postgres to be ready
