@@ -1,8 +1,6 @@
 name: Deploy Service Container to GHCR
 on:
   push
-env:
-  postgres_14_container_id_file: /tmp/cidfile
 jobs:
   publish-container:
     runs-on: ubuntu-latest
@@ -14,7 +12,7 @@ jobs:
         env:
           POSTGRES_HOST_AUTH_METHOD: trust
         options: |
-          --cidfile ${{ env.postgres_14_container_id_file }}
+          --cidfile /tmp/cidfile
     steps:
       - run: docker container list
       - name: wait for postgres to be ready
@@ -25,4 +23,4 @@ jobs:
           done
       - run: createdb -U postgres -h localhost -p 5432 prac
       - run: psql -U postgres -h localhost -p 5432 -c "\l"
-      - run: ls /tmp && cat ${{ env.postgres_14_container_id_file }}
+      - run: ls /tmp && cat /tmp/cidfile
