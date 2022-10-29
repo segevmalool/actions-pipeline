@@ -14,15 +14,15 @@ jobs:
         options: --cidfile /tmp/cidfile
     steps:
       - run: docker container list
-      - name: wait for postgres to be ready
+      - name: Wait for postgres to be ready
         run: |
           while ! pg_isready -U postgres -h localhost -p 5432; do
             sleep 0.1
           done
       - run: createdb -U postgres -h localhost -p 5432 prac
       - run: psql -U postgres -h localhost -p 5432 -c "\l"
-      - run: export postgres_image_id=$(docker commit $(cat /tmp/cidfile) ghcr.io/psql-prac:latest)
-      - run: echo postgres image id ${postgres_image_id}
+      - run: docker commit $(cat /tmp/cidfile) ghcr.io/psql-prac:latest
+      - run: docker image list
       - name: Login to GHCR
         uses: docker/login-action@v2
         with:
