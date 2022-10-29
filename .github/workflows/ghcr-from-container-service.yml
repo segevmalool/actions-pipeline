@@ -21,11 +21,11 @@ jobs:
           done
       - run: createdb -U postgres -h localhost -p 5432 prac
       - run: psql -U postgres -h localhost -p 5432 -c "\l"
-      - run: docker commit $(cat /tmp/cidfile) ghcr.io/psql-prac:latest
+      - run: docker commit $(cat /tmp/cidfile) ghcr.io/segevmalool/psql-prac:latest
       - name: Login to GHCR
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker push ghcr.io/psql-prac:latest
+      - run: docker push ghcr.io/segevmalool/psql-prac:latest
