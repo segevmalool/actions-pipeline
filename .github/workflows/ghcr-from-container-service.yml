@@ -25,3 +25,4 @@ jobs:
           done
       - run: createdb -U postgres -h localhost -p 5432 prac
       - run: psql -U postgres -h localhost -p 5432 -c "\l"
+      - run: ls /tmp && cat /tmp/postgres-12-container-id
