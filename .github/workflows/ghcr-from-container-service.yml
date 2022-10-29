@@ -22,7 +22,7 @@ jobs:
       - run: docker container list
       - run: createdb -U postgres -h localhost -p 5432 prac
       - run: psql -U postgres -h localhost -p 5432 -c "\l"
-      - run: psql -d prac < index.sql
+      - run: psql -U postgres -h localhost -p 5432 -d prac < index.sql
       - run: docker commit $(cat /tmp/cidfile) ghcr.io/segevmalool/psql-prac:latest
       - name: Login to GHCR
         uses: docker/login-action@v2
