@@ -31,3 +31,4 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: docker push ghcr.io/segevmalool/psql-prac:latest
+      - run: docker info
